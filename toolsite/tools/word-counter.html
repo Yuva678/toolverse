@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Word Counter — Count Words, Characters & More | ToolVerse</title>
+  <meta name="description" content="Free online word counter. Instantly count words, characters, sentences, paragraphs and reading time. No signup required."/>
+  <meta name="keywords" content="word counter, character counter, count words online, word count tool"/>
+  <link rel="canonical" href="https://toolverse.io/tools/word-counter.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Word Counter","description":"Count words, characters and more online for free","url":"https://toolverse.io/tools/word-counter.html","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0"}}</script>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+
+  <main class="container">
+    <div class="tool-pg">
+
+      <!-- ── Main column ── -->
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Text Tools</span><span class="bc-sep">›</span><span>Word Counter</span></nav>
+
+        <div class="tool-head">
+          <div class="tool-irow">
+            <div class="tool-pgico">🔢</div>
+            <div>
+              <h1 class="tool-title">Word Counter</h1>
+              <span class="badge badge-green">Free</span>
+            </div>
+          </div>
+          <p class="tool-desc">Instantly count words, characters, sentences, paragraphs, and estimated reading time. Stats update live as you type.</p>
+        </div>
+
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+
+        <div class="tool-box">
+          <div class="form-group">
+            <label class="form-label" for="wc-input">Your Text</label>
+            <textarea class="form-ctrl" id="wc-input" placeholder="Type or paste your text here…" rows="10"></textarea>
+            <p class="form-hint">Stats update automatically as you type.</p>
+          </div>
+
+          <div class="stats-row">
+            <div class="s-badge"><div class="s-val" id="wc-words">0</div><div class="s-lbl">Words</div></div>
+            <div class="s-badge"><div class="s-val" id="wc-chars">0</div><div class="s-lbl">Characters</div></div>
+            <div class="s-badge"><div class="s-val" id="wc-nospace">0</div><div class="s-lbl">No Spaces</div></div>
+            <div class="s-badge"><div class="s-val" id="wc-sents">0</div><div class="s-lbl">Sentences</div></div>
+            <div class="s-badge"><div class="s-val" id="wc-paras">0</div><div class="s-lbl">Paragraphs</div></div>
+            <div class="s-badge"><div class="s-val" id="wc-read">0 min</div><div class="s-lbl">Read Time</div></div>
+          </div>
+
+          <div class="btn-grp">
+            <button class="btn btn-secondary" onclick="document.getElementById('wc-input').value='';wcAnalyze()">🗑️ Clear</button>
+            <button class="btn btn-secondary" onclick="copyToClipboard(document.getElementById('wc-input').value)">📋 Copy Text</button>
+          </div>
+        </div>
+
+        <div class="how-to">
+          <h3>📖 How to Use Word Counter</h3>
+          <ol>
+            <li>Type or paste any text into the box above.</li>
+            <li>All statistics update <strong>instantly</strong> as you type — no button needed.</li>
+            <li>Reading time is estimated at 200 words per minute.</li>
+            <li>Use <strong>Clear</strong> to reset, or <strong>Copy Text</strong> to copy your content.</li>
+          </ol>
+        </div>
+
+        <div class="about-tool">
+          <h3>ℹ️ About Word Counter</h3>
+          <p>A free browser-based word counter for writers, students, bloggers, and social media managers. It works entirely client-side — your text is never uploaded anywhere. Perfect for checking essay word limits, tweet lengths, or SEO content targets.</p>
+        </div>
+      </div>
+
+      <!-- ── Sidebar ── -->
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box">
+          <h3>Related Tools</h3>
+          <a class="rel-item" href="case-converter.html"><div class="rel-ico">🔡</div>Case Converter</a>
+          <a class="rel-item" href="text-repeater.html"><div class="rel-ico">🔁</div>Text Repeater</a>
+          <a class="rel-item" href="text-sorter.html"><div class="rel-ico">📋</div>Text Sorter</a>
+          <a class="rel-item" href="remove-duplicate-lines.html"><div class="rel-ico">🧹</div>Remove Duplicates</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    const wcIn = document.getElementById('wc-input');
+    wcIn.addEventListener('input', wcAnalyze);
+    function wcAnalyze() {
+      const t = wcIn.value, tr = t.trim();
+      const words = tr ? tr.split(/\s+/).filter(Boolean).length : 0;
+      const sents = tr ? (tr.match(/[.!?]+(\s|$)/g)||[]).length || (tr?1:0) : 0;
+      const paras = tr ? tr.split(/\n\s*\n/).filter(p=>p.trim()).length || 1 : 0;
+      const mins  = Math.ceil(words/200);
+      document.getElementById('wc-words').textContent  = words.toLocaleString();
+      document.getElementById('wc-chars').textContent  = t.length.toLocaleString();
+      document.getElementById('wc-nospace').textContent= t.replace(/\s/g,'').length.toLocaleString();
+      document.getElementById('wc-sents').textContent  = sents;
+      document.getElementById('wc-paras').textContent  = tr ? paras : 0;
+      document.getElementById('wc-read').textContent   = words<1?'0 min':(mins<1?'<1 min':mins+' min');
+    }
+  </script>
+</body>
+</html>

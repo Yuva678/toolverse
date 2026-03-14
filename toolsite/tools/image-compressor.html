@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Image Compressor — Compress Images Online Free | ToolVerse</title>
+  <meta name="description" content="Compress images online for free. Reduce image file size without visible quality loss. Browser-based — completely private."/>
+  <meta name="keywords" content="image compressor, compress image online, reduce image size, image optimizer free"/>
+  <link rel="canonical" href="https://toolverse.io/tools/image-compressor.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Image Tools</span><span class="bc-sep">›</span><span>Image Compressor</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">🗜️</div><div><h1 class="tool-title">Image Compressor</h1><span class="badge badge-green">Free</span></div></div>
+          <p class="tool-desc">Reduce image file size while maintaining acceptable visual quality. Adjust the quality slider to find your perfect balance between size and clarity.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <div class="drop-zone" id="dz"><div class="dz-ico">🗜️</div><div class="dz-title">Drop your image here or click to upload</div><div class="dz-sub">JPG, PNG, WebP — max 20MB</div><input type="file" id="fi" accept="image/*" hidden/></div>
+          <div id="ctrl" style="display:none;margin-top:20px;">
+            <div class="form-group">
+              <label class="form-label" for="qual">Quality: <strong id="qval">75</strong>%</label>
+              <input type="range" id="qual" min="1" max="100" value="75" oninput="document.getElementById('qval').textContent=this.value"/>
+              <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--txt3);margin-top:4px;"><span>Smallest file</span><span>Best quality</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Output Format</label>
+              <select class="form-ctrl" id="cfmt" style="height:44px;"><option value="image/jpeg">JPEG (best compression)</option><option value="image/webp">WebP (modern, efficient)</option><option value="image/png">PNG (lossless)</option></select>
+            </div>
+            <div class="btn-grp">
+              <button class="btn btn-primary" onclick="doCompress()">🗜️ Compress Image</button>
+              <button class="btn btn-secondary" onclick="resetC()">🔄 Reset</button>
+            </div>
+            <div class="img-cmp" id="cmp" style="display:none;">
+              <div class="img-cmp-box"><img id="orig-p" alt="Original" style="max-height:180px;border-radius:var(--r-md);margin:0 auto 8px;"/><div class="img-cmp-lbl">Original</div><div class="img-cmp-sz" id="orig-sz">—</div></div>
+              <div class="img-cmp-box"><img id="comp-p" alt="Compressed" style="max-height:180px;border-radius:var(--r-md);margin:0 auto 8px;"/><div class="img-cmp-lbl">Compressed</div><div class="img-cmp-sz" id="comp-sz">—</div><div id="save-pill"></div></div>
+            </div>
+            <div id="dl-btn" style="display:none;margin-top:16px;">
+              <button class="btn btn-success btn-lg btn-full" onclick="dlCompressed()">⬇️ Download Compressed Image</button>
+            </div>
+          </div>
+        </div>
+        <div class="how-to">
+          <h3>📖 How to Compress Images</h3>
+          <ol>
+            <li>Upload an image by dropping it or clicking the upload area.</li>
+            <li>Adjust the <strong>Quality</strong> slider — 70–80% is a good balance for most images.</li>
+            <li>Choose output format: <strong>JPEG</strong> or <strong>WebP</strong> gives the best compression.</li>
+            <li>Click <strong>Compress Image</strong>, review the size savings, then download.</li>
+          </ol>
+        </div>
+        <div class="about-tool">
+          <h3>ℹ️ About Image Compressor</h3>
+          <p>Smaller images load faster and use less storage. This tool is ideal for optimising website images, reducing email attachment sizes, or fitting images within upload limits. WebP format typically achieves 25–35% smaller files than JPEG at equivalent quality.</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="image-resizer.html"><div class="rel-ico">📐</div>Image Resizer</a>
+          <a class="rel-item" href="jpg-to-png.html"><div class="rel-ico">🖼️</div>JPG to PNG</a>
+          <a class="rel-item" href="png-to-jpg.html"><div class="rel-ico">🌄</div>PNG to JPG</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    let oImg=null,oFile=null,cBlob=null;
+    initDrop(document.getElementById('dz'),document.getElementById('fi'),handleFile);
+    document.getElementById('fi').addEventListener('change',()=>document.getElementById('fi').files[0]&&handleFile(document.getElementById('fi').files[0]));
+    async function handleFile(f){
+      if(!f.type.startsWith('image/')){showToast('Please select a valid image.');return;}
+      oFile=f;oImg=await Img.load(f);
+      document.getElementById('orig-p').src=oImg.src;
+      document.getElementById('orig-sz').textContent=Img.fmtSize(f.size);
+      document.getElementById('dz').style.display='none';
+      document.getElementById('ctrl').style.display='';
+    }
+    function doCompress(){
+      if(!oImg)return;
+      const q=+document.getElementById('qual').value/100;
+      const fmt=document.getElementById('cfmt').value;
+      Img.canvas(oImg,oImg.naturalWidth,oImg.naturalHeight).toBlob(b=>{
+        cBlob=b;
+        document.getElementById('comp-p').src=URL.createObjectURL(b);
+        document.getElementById('comp-sz').textContent=Img.fmtSize(b.size);
+        const pct=((1-b.size/oFile.size)*100).toFixed(1);
+        document.getElementById('save-pill').innerHTML=pct>0?`<span class="save-pill">↓ ${pct}% smaller</span>`:'<span style="font-size:.8rem;color:var(--txt3)">Try lower quality</span>';
+        document.getElementById('cmp').style.display='';
+        document.getElementById('dl-btn').style.display='';
+      },fmt,q);
+    }
+    function dlCompressed(){if(cBlob)dlFile(cBlob,'compressed.'+document.getElementById('cfmt').value.split('/')[1]);}
+    function resetC(){oImg=oFile=cBlob=null;document.getElementById('dz').style.display='';document.getElementById('ctrl').style.display='none';document.getElementById('cmp').style.display='none';document.getElementById('dl-btn').style.display='none';document.getElementById('fi').value='';}
+  </script>
+</body>
+</html>

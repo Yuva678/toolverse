@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>JSON Formatter & Validator — Free Online | ToolVerse</title>
+  <meta name="description" content="Format, validate, and minify JSON data online. Syntax highlighting, error detection, and file stats. Free browser-based JSON tool."/>
+  <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, format JSON online, minify JSON, JSON pretty print"/>
+  <link rel="canonical" href="https://toolverse.io/tools/json-formatter.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Developer Tools</span><span class="bc-sep">›</span><span>JSON Formatter</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">{ }</div><div><h1 class="tool-title">JSON Formatter</h1><span class="badge badge-purple">Dev Tool</span></div></div>
+          <p class="tool-desc">Paste raw JSON to format it with proper indentation and syntax highlighting, validate it for errors, or minify it to reduce size. 100% browser-based — your data is never sent to a server.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <!-- Mode chips -->
+          <div class="chips" id="json-modes">
+            <button class="chip active" onclick="setJMode('fmt',this)">✨ Format / Beautify</button>
+            <button class="chip" onclick="setJMode('min',this)">📦 Minify</button>
+            <button class="chip" onclick="setJMode('val',this)">✅ Validate</button>
+          </div>
+
+          <!-- Indent size -->
+          <div id="indent-row" style="display:flex;align-items:center;gap:10px;margin:14px 0;" class="chips">
+            <span style="font-size:.82rem;font-weight:600;color:var(--txt2);white-space:nowrap;">Indent:</span>
+            <button class="chip active" onclick="setIndent(2,this)">2 spaces</button>
+            <button class="chip" onclick="setIndent(4,this)">4 spaces</button>
+            <button class="chip" onclick="setIndent('tab',this)">Tab</button>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Input JSON</label>
+            <textarea class="form-ctrl" id="json-in" rows="10" placeholder='{"name":"ToolVerse","free":true,"tools":15}' style="font-family:'JetBrains Mono',monospace;font-size:.875rem;"></textarea>
+          </div>
+
+          <div class="btn-grp">
+            <button class="btn btn-primary" onclick="processJSON()">⚡ Process JSON</button>
+            <button class="btn btn-secondary" onclick="loadExample()">📋 Load Example</button>
+            <button class="btn btn-secondary" onclick="clearJSON()">🗑️ Clear</button>
+          </div>
+
+          <div id="json-msg" style="display:none;margin-top:14px;"></div>
+
+          <!-- Stats row -->
+          <div class="stats-row" id="json-stats" style="display:none;margin-top:14px;">
+            <div class="s-badge"><div class="s-val" id="js-keys">0</div><div class="s-lbl">Keys</div></div>
+            <div class="s-badge"><div class="s-val" id="js-size">—</div><div class="s-lbl">Size</div></div>
+            <div class="s-badge"><div class="s-val" id="js-depth">0</div><div class="s-lbl">Depth</div></div>
+            <div class="s-badge"><div class="s-val" id="js-type">—</div><div class="s-lbl">Root type</div></div>
+          </div>
+
+          <!-- Output -->
+          <div id="json-out-wrap" style="display:none;margin-top:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <label class="form-label" style="margin:0;">Output</label>
+              <button class="btn btn-secondary btn-sm" onclick="copyToClipboard(document.getElementById('json-out').textContent)">📋 Copy</button>
+            </div>
+            <div class="json-out" id="json-out"></div>
+          </div>
+        </div>
+
+        <div class="how-to">
+          <h3>📖 How to Use JSON Formatter</h3>
+          <ol>
+            <li>Paste your raw JSON data into the input area above.</li>
+            <li>Choose a mode: <strong>Format</strong> (pretty-print), <strong>Minify</strong> (remove whitespace), or <strong>Validate</strong> (check for errors).</li>
+            <li>Select indentation style (2 spaces, 4 spaces, or tabs) for formatting.</li>
+            <li>Click <strong>Process JSON</strong> — the result appears with syntax highlighting.</li>
+          </ol>
+        </div>
+
+        <div class="about-tool">
+          <h3>ℹ️ Common JSON Mistakes</h3>
+          <p>The most frequent JSON errors are: missing double quotes around property keys, trailing commas after the last item in an array or object, using single quotes instead of double quotes, and unescaped special characters inside strings. This validator will identify these issues and show you the exact error message.</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="base64.html"><div class="rel-ico">🔐</div>Base64 Encoder</a>
+          <a class="rel-item" href="word-counter.html"><div class="rel-ico">🔢</div>Word Counter</a>
+          <a class="rel-item" href="remove-duplicate-lines.html"><div class="rel-ico">🧹</div>Remove Duplicates</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    let jMode='fmt',jIndent=2;
+    function setJMode(m,el){jMode=m;document.querySelectorAll('#json-modes .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('indent-row').style.display=m==='fmt'?'':'none';}
+    function setIndent(v,el){jIndent=v;document.querySelectorAll('#indent-row .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+    function processJSON(){
+      const raw=document.getElementById('json-in').value.trim();
+      const msg=document.getElementById('json-msg');
+      msg.style.display='none';
+      document.getElementById('json-out-wrap').style.display='none';
+      document.getElementById('json-stats').style.display='none';
+      if(!raw){showToast('Please paste some JSON first.');return;}
+      let parsed;
+      try{parsed=JSON.parse(raw);}
+      catch(e){msg.innerHTML=`<div class="alert alert-error">❌ <strong>Invalid JSON:</strong> ${e.message}</div>`;msg.style.display='';return;}
+      if(jMode==='val'){msg.innerHTML='<div class="alert alert-success">✅ <strong>Valid JSON!</strong> Your JSON is syntactically correct.</div>';msg.style.display='';return;}
+      msg.innerHTML='<div class="alert alert-success">✅ Valid JSON</div>';msg.style.display='';
+      const output=jMode==='min'?JSON.stringify(parsed):JSON.stringify(parsed,null,jIndent==='tab'?'\t':jIndent);
+      document.getElementById('json-out').innerHTML=syntaxHL(output);
+      document.getElementById('json-out-wrap').style.display='';
+      // Stats
+      const keys=countKeys(parsed),depth=getDepth(parsed);
+      const type=Array.isArray(parsed)?'Array':(typeof parsed==='object'?'Object':typeof parsed);
+      document.getElementById('js-keys').textContent=keys;
+      document.getElementById('js-size').textContent=fmtBytes(new Blob([output]).size);
+      document.getElementById('js-depth').textContent=depth;
+      document.getElementById('js-type').textContent=type;
+      document.getElementById('json-stats').style.display='';
+    }
+    function syntaxHL(json){
+      return json.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/("(\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{
+          let c='jn';
+          if(/^"/.test(m))c=/:$/.test(m)?'jk':'js';
+          else if(/true|false/.test(m))c='jb';
+          else if(/null/.test(m))c='jl';
+          return`<span class="${c}">${m}</span>`;
+        });
+    }
+    function countKeys(o){if(typeof o!=='object'||o===null)return 0;let n=0;(Array.isArray(o)?o:Object.values(o)).forEach(v=>{n++;n+=countKeys(v);});return n;}
+    function getDepth(o,d=0){if(typeof o!=='object'||o===null)return d;const vs=Array.isArray(o)?o:Object.values(o);return vs.length?Math.max(...vs.map(v=>getDepth(v,d+1))):d;}
+    function fmtBytes(b){if(b<1024)return b+'B';return(b/1024).toFixed(1)+'KB';}
+    function clearJSON(){document.getElementById('json-in').value='';document.getElementById('json-msg').style.display='none';document.getElementById('json-out-wrap').style.display='none';document.getElementById('json-stats').style.display='none';}
+    function loadExample(){document.getElementById('json-in').value=JSON.stringify({"name":"ToolVerse","version":"3.0","free":true,"categories":["Text Tools","Image Tools","Student Tools","Developer Tools"],"tools":[{"id":"word-counter","category":"Text Tools","rating":4.9},{"id":"image-resizer","category":"Image Tools","rating":4.8},{"id":"gpa-calculator","category":"Student Tools","rating":4.7}],"stats":{"totalTools":15,"launched":2024}},null,2);}
+  </script>
+</body>
+</html>
