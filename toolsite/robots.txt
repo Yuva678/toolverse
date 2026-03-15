@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://toolverse.io/sitemap.xml
-
-# Disallow any admin or private directories (none exist, but good practice)
+# Block system files
 Disallow: /private/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://toolverse-pi.vercel.app/sitemap.xml
