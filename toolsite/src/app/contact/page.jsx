@@ -17,9 +17,9 @@ export default function ContactPage() {
       </p>
 
       <ul>
-        <li><strong>General Inquiries:</strong> hello@toolverse.io</li>
-        <li><strong>Bug Reports:</strong> bugs@toolverse.io</li>
-        <li><strong>Partnerships & Advertising:</strong> ads@toolverse.io</li>
+        <li><strong>General Inquiries:</strong> yuvarajgududuru@gmail.com</li>
+        <li><strong>Bug Reports:</strong> yuvarajgududuru@gmail.com</li>
+        <li><strong>Partnerships & Advertising:</strong>yuvarajgududuru@gmail.com</li>
       </ul>
 
       <h2>Feature Requests</h2>
@@ -30,10 +30,9 @@ export default function ContactPage() {
 
       <h2>Mailing Address</h2>
       <p>
-        <em>ToolVerse Digital Utilities</em><br/>
-        123 Web Tech Avenue, Suite 400<br/>
-        Innovation District, CA 90210<br/>
-        United States
+        <em>ToolVerse Web Application</em>
+        karnataka,bellary<br/>
+        India
       </p>
 
       <p><em>*Note: Since our tools are 100% free and we do not require accounts, we do not offer real-time phone support.*</em></p>
