@@ -7,7 +7,7 @@ export default function DisclaimerPage() {
   return (
     <div className="container prose">
       <h1>Disclaimer</h1>
-      <p><em>Last Updated: October 2025</em></p>
+      <p><em>Last Updated: apirl 2026</em></p>
 
       <h2>1. Informational Purposes Only</h2>
       <p>All calculators, converters, formatting tools, and content provided on <strong>ToolVerse</strong> (toolverse.io) are meant for educational and informational purposes only. While we do everything in our power to ensure the algorithmic accuracy of our utilities, we cannot guarantee completely flawless results.</p>
