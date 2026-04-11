@@ -30,7 +30,7 @@ export default function ContactPage() {
 
       <h2>Mailing Address</h2>
       <p>
-        <em>ToolVerse Web Application</em>
+        <em>ToolVerse Web Application</em><br/>
         karnataka,bellary<br/>
         India
       </p>
