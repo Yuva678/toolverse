@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Text Sorter — Sort Lines Alphabetically Online | ToolVerse</title>
+  <meta name="description" content="Sort lines of text alphabetically, reverse alphabetically, by length, numerically, or randomly. Free online text sorter."/>
+  <meta name="keywords" content="text sorter, sort lines alphabetically, sort list online, reverse sort, random shuffle"/>
+  <link rel="canonical" href="https://toolverse.io/tools/text-sorter.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Text Tools</span><span class="bc-sep">›</span><span>Text Sorter</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">📋</div><div><h1 class="tool-title">Text Sorter</h1><span class="badge badge-green">Free</span></div></div>
+          <p class="tool-desc">Sort lines of text alphabetically (A–Z or Z–A), by length, numerically, or randomly. Each line is treated as one item. Options for trimming and case-insensitive sorting.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <div class="form-group">
+            <label class="form-label">Input (one item per line)</label>
+            <textarea class="form-ctrl" id="sort-in" rows="10" placeholder="Banana&#10;Apple&#10;Cherry&#10;Mango"></textarea>
+          </div>
+          <div class="chips" id="sort-chips">
+            <button class="chip active" onclick="setMode('az',this)">A → Z</button>
+            <button class="chip" onclick="setMode('za',this)">Z → A</button>
+            <button class="chip" onclick="setMode('la',this)">Shortest First</button>
+            <button class="chip" onclick="setMode('ld',this)">Longest First</button>
+            <button class="chip" onclick="setMode('num',this)">Numeric</button>
+            <button class="chip" onclick="setMode('rand',this)">🎲 Random</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:12px 0 20px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:.875rem;cursor:pointer;color:var(--txt2);"><input type="checkbox" id="s-trim" checked> Trim whitespace</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:.875rem;cursor:pointer;color:var(--txt2);"><input type="checkbox" id="s-blank"> Remove blank lines</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:.875rem;cursor:pointer;color:var(--txt2);"><input type="checkbox" id="s-ci"> Case-insensitive</label>
+          </div>
+          <div class="btn-grp">
+            <button class="btn btn-primary" onclick="doSort()">📋 Sort Lines</button>
+            <button class="btn btn-secondary" onclick="doReverse()">↕️ Reverse</button>
+            <button class="btn btn-secondary" onclick="clearSort()">🗑️ Clear</button>
+          </div>
+          <div class="form-group" style="margin-top:20px;">
+            <label class="form-label">Sorted Result <span id="sort-info" style="font-weight:400;color:var(--txt3)"></span></label>
+            <div class="out-box" id="sort-out" style="min-height:120px;">Results appear here…<button class="cp-btn" onclick="copyToClipboard(document.getElementById('sort-out').childNodes[0]?.nodeValue||'')">Copy</button></div>
+          </div>
+        </div>
+        <div class="how-to">
+          <h3>📖 How to Use Text Sorter</h3>
+          <ol>
+            <li>Paste your list (one item per line) into the input area.</li>
+            <li>Select a sort mode: <strong>A→Z</strong>, <strong>Z→A</strong>, by length, numeric, or random.</li>
+            <li>Toggle options like trim whitespace or case-insensitive sorting.</li>
+            <li>Click <strong>Sort Lines</strong> and copy your sorted result.</li>
+          </ol>
+        </div>
+        <div class="about-tool">
+          <h3>ℹ️ About Text Sorter</h3>
+          <p>Perfect for sorting keyword lists, organising CSV entries, alphabetising names, or randomising a list for a raffle. The numeric sort mode correctly orders numbers like 1, 2, 10, 20 rather than treating them as strings (1, 10, 2, 20).</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="remove-duplicate-lines.html"><div class="rel-ico">🧹</div>Remove Duplicates</a>
+          <a class="rel-item" href="word-counter.html"><div class="rel-ico">🔢</div>Word Counter</a>
+          <a class="rel-item" href="case-converter.html"><div class="rel-ico">🔡</div>Case Converter</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    let sMode='az';
+    function setMode(m,el){sMode=m;document.querySelectorAll('#sort-chips .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+    function setOut(text){const out=document.getElementById('sort-out'),btn=out.querySelector('.cp-btn');out.textContent=text;out.appendChild(btn);}
+    function doSort(){
+      let lines=document.getElementById('sort-in').value.split('\n');
+      const trim=document.getElementById('s-trim').checked;
+      const blanks=document.getElementById('s-blank').checked;
+      const ci=document.getElementById('s-ci').checked;
+      if(trim)lines=lines.map(l=>l.trim());
+      if(blanks)lines=lines.filter(l=>l.length>0);
+      switch(sMode){
+        case'az':lines.sort((a,b)=>(ci?a.toLowerCase():a).localeCompare(ci?b.toLowerCase():b));break;
+        case'za':lines.sort((a,b)=>(ci?b.toLowerCase():b).localeCompare(ci?a.toLowerCase():a));break;
+        case'la':lines.sort((a,b)=>a.length-b.length);break;
+        case'ld':lines.sort((a,b)=>b.length-a.length);break;
+        case'num':lines.sort((a,b)=>parseFloat(a)-parseFloat(b));break;
+        case'rand':lines.sort(()=>Math.random()-.5);break;
+      }
+      document.getElementById('sort-info').textContent=`(${lines.length} lines)`;
+      setOut(lines.join('\n'));
+    }
+    function doReverse(){setOut(document.getElementById('sort-in').value.split('\n').reverse().join('\n'));}
+    function clearSort(){document.getElementById('sort-in').value='';setOut('Results appear here…');document.getElementById('sort-info').textContent='';}
+  </script>
+</body>
+</html>

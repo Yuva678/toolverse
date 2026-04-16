@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+
+<link rel="icon" href="/favicon.ico">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ContactPage",
+ "name": "Contact ToolVerse",
+ "url": "https://toolverse-pi.vercel.app/contact.html",
+ "publisher": {
+   "@type": "Organization",
+   "name": "ToolVerse"
+ }
+}
+</script>
+
+<link rel="canonical" href="https://toolverse-pi.vercel.app/contact.html">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Contact Us — ToolVerse</title>
+
+<meta name="description" content="Contact ToolVerse to report bugs, suggest tools, or ask questions about our free online utilities.">
+
+<meta property="og:title" content="Contact ToolVerse">
+<meta property="og:description" content="Contact the ToolVerse team to report bugs, suggest tools, or ask questions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toolverse-pi.vercel.app/contact.html">
+  <meta property="og:image" content="https://toolverse-pi.vercel.app/preview.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement</div></div>
+  <main class="container">
+    <div class="page-hdr">
+      <h1>Contact Us</h1>
+      <p>Have a question, found a bug, or want to suggest a new tool? We'd love to hear from you.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="tool-box">
+          <h2 style="font-size:1.2rem;margin-bottom:22px;">Send Us a Message</h2>
+          <div id="form-ok" class="alert alert-success" style="display:none;">✅ Thank you! Your message has been sent. We'll respond within 1–2 business days.</div>
+          <div class="form-group"><label class="form-label" for="cn">Your Name *</label><input type="text" class="form-ctrl" id="cn" placeholder="yuvaraj"/></div>
+          <div class="form-group"><label class="form-label" for="ce">Email Address *</label><input type="email" class="form-ctrl" id="ce" placeholder="yuvarajgududuru@gmail.com"/></div>
+          <div class="form-group"><label class="form-label" for="cs">Subject</label><select class="form-ctrl" id="cs" style="height:46px;"><option value="">Select a topic…</option><option>🐛 Bug Report</option><option>💡 Tool Suggestion</option><option>💬 General Inquiry</option><option>🤝 Partnership</option><option>📝 Other</option></select></div>
+          <div class="form-group"><label class="form-label" for="cm">Message *</label><textarea class="form-ctrl" id="cm" rows="6" placeholder="Describe your issue or suggestion in detail…"></textarea></div>
+          <button class="btn btn-primary btn-lg btn-full" onclick="submitForm()">✉️ Send Message</button>
+          <p style="font-size:.775rem;color:var(--txt3);margin-top:12px;text-align:center;">We respond within 1–2 business days.</p>
+        </div>
+      </div>
+      <div>
+        <div class="contact-info">
+          <h3 style="font-size:1rem;margin-bottom:20px;">Other Ways to Reach Us</h3>
+          <div class="ci-item"><div class="ci-ico">📧</div><div class="ci-text"><h4>Email</h4><p>yuvarajgududuru@gmail.com</p></div></div>
+          <div class="ci-item"><div class="ci-ico">⏱️</div><div class="ci-text"><h4>Response Time</h4><p>Usually within 1–2 business days</p></div></div>
+          <div class="ci-item"><div class="ci-ico">🌍</div><div class="ci-text"><h4>Availability</h4><p>Monday–Friday, 9 AM – 6 PM UTC</p></div></div>
+          <div class="divider"></div>
+          <h4 style="font-size:.82rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);">Quick Answers</h4>
+          <details style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:.875rem;font-weight:600;padding:7px 0;">Are all tools really free?</summary><p style="font-size:.845rem;color:var(--txt3);margin-top:6px;padding-bottom:6px;">Yes — every tool is 100% free with no hidden costs, no signup, and no limits.</p></details>
+          <details style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:.875rem;font-weight:600;padding:7px 0;">Is my data safe?</summary><p style="font-size:.845rem;color:var(--txt3);margin-top:6px;padding-bottom:6px;">Absolutely. All tools run in your browser. Your text and images never leave your device.</p></details>
+          <details style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:.875rem;font-weight:600;padding:7px 0;">Can you add a new tool?</summary><p style="font-size:.845rem;color:var(--txt3);margin-top:6px;padding-bottom:6px;">We love suggestions! Use the contact form and select "Tool Suggestion". We add new tools regularly.</p></details>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="js/nav.js"></script><script src="js/main.js"></script>
+  <script>
+    function submitForm(){
+      const n=document.getElementById('cn').value.trim();
+      const e=document.getElementById('ce').value.trim();
+      const m=document.getElementById('cm').value.trim();
+      if(!n){showToast('Please enter your name.');return;}
+      if(!e||!e.includes('@')){showToast('Please enter a valid email address.');return;}
+      if(!m){showToast('Please enter a message.');return;}
+      document.getElementById('form-ok').style.display='';
+      ['cn','ce','cm'].forEach(id=>document.getElementById(id).value='');
+      document.getElementById('cs').value='';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
