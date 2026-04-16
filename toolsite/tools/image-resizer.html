@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Image Resizer — Resize Images Online Free | ToolVerse</title>
+  <meta name="description" content="Resize images online for free. Change image dimensions by pixels or percentage. Works in your browser — images never leave your device."/>
+  <meta name="keywords" content="image resizer, resize image online, change image dimensions, free image resizer"/>
+  <link rel="canonical" href="https://toolverse.io/tools/image-resizer.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    .prev-img{max-width:100%;max-height:260px;border-radius:var(--r-md);box-shadow:var(--sh-md);margin:0 auto;display:block;}
+    .img-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;justify-content:center;}
+    .img-meta span{font-size:.8rem;background:var(--surface2);border:1px solid var(--border);padding:4px 12px;border-radius:var(--r-pill);color:var(--txt2);}
+  </style>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Image Tools</span><span class="bc-sep">›</span><span>Image Resizer</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">📐</div><div><h1 class="tool-title">Image Resizer</h1><span class="badge badge-green">Free</span></div></div>
+          <p class="tool-desc">Resize any image to custom pixel dimensions or scale by percentage. All processing happens in your browser — your images are never uploaded to any server.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <div class="drop-zone" id="dz"><div class="dz-ico">📐</div><div class="dz-title">Drop your image here or click to upload</div><div class="dz-sub">JPG, PNG, GIF, WebP — max 20MB</div><input type="file" id="fi" accept="image/*" hidden/></div>
+          <div id="prev" style="display:none;text-align:center;margin-top:20px;">
+            <img id="prev-img" class="prev-img" alt="Preview"/>
+            <div class="img-meta"><span id="im-size">—</span><span id="im-dim">—</span><span id="im-type">—</span></div>
+          </div>
+          <div id="ctrl" style="display:none;margin-top:20px;">
+            <div style="display:flex;gap:10px;margin-bottom:16px;" id="mode-chips">
+              <button class="chip active" onclick="setMode('px',this)">By Pixels</button>
+              <button class="chip" onclick="setMode('pct',this)">By Percentage</button>
+            </div>
+            <div id="px-row" class="in-row">
+              <div class="form-group"><label class="form-label" for="rw">Width (px)</label><input type="number" class="form-ctrl" id="rw" min="1" max="10000" oninput="syncDim('w')"/></div>
+              <div class="form-group"><label class="form-label" for="rh">Height (px)</label><input type="number" class="form-ctrl" id="rh" min="1" max="10000" oninput="syncDim('h')"/></div>
+            </div>
+            <div id="pct-row" style="display:none;" class="form-group">
+              <label class="form-label" for="pct">Scale Percentage</label>
+              <input type="number" class="form-ctrl" id="pct" value="50" min="1" max="500"/>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:.875rem;margin-bottom:16px;cursor:pointer;color:var(--txt2);">
+              <input type="checkbox" id="ar" checked> Maintain aspect ratio
+            </label>
+            <div class="form-group">
+              <label class="form-label">Output Format</label>
+              <select class="form-ctrl" id="fmt" style="height:44px;"><option value="image/png">PNG</option><option value="image/jpeg" selected>JPEG</option><option value="image/webp">WebP</option></select>
+            </div>
+            <div class="btn-grp">
+              <button class="btn btn-primary btn-lg" onclick="doResize()">📐 Resize &amp; Download</button>
+              <button class="btn btn-secondary" onclick="resetTool()">🔄 Reset</button>
+            </div>
+          </div>
+        </div>
+        <div class="how-to">
+          <h3>📖 How to Resize an Image</h3>
+          <ol>
+            <li>Drop an image into the upload area or click to browse your files.</li>
+            <li>Choose <strong>By Pixels</strong> for exact dimensions or <strong>By Percentage</strong> to scale proportionally.</li>
+            <li>Enter your width and/or height. Enable <strong>Maintain aspect ratio</strong> to avoid distortion.</li>
+            <li>Select output format (PNG, JPEG, or WebP) and click <strong>Resize &amp; Download</strong>.</li>
+          </ol>
+        </div>
+        <div class="about-tool">
+          <h3>ℹ️ About Image Resizer</h3>
+          <p>Resize images for web pages, social media, email attachments, or any other purpose directly in your browser. No account needed, no data uploaded — completely private. Supports JPEG, PNG, GIF, and WebP images up to 20MB.</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="image-compressor.html"><div class="rel-ico">🗜️</div>Image Compressor</a>
+          <a class="rel-item" href="jpg-to-png.html"><div class="rel-ico">🖼️</div>JPG to PNG</a>
+          <a class="rel-item" href="png-to-jpg.html"><div class="rel-ico">🌄</div>PNG to JPG</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    let oImg=null,oW=0,oH=0,rMode='px';
+    initDrop(document.getElementById('dz'),document.getElementById('fi'),handleFile);
+    document.getElementById('fi').addEventListener('change',()=>document.getElementById('fi').files[0]&&handleFile(document.getElementById('fi').files[0]));
+    async function handleFile(f){
+      if(!f.type.startsWith('image/')){showToast('Please select a valid image.');return;}
+      if(f.size>20971520){showToast('Image must be under 20MB.');return;}
+      oImg=await Img.load(f);oW=oImg.naturalWidth;oH=oImg.naturalHeight;
+      document.getElementById('prev-img').src=oImg.src;
+      document.getElementById('im-size').textContent='File: '+Img.fmtSize(f.size);
+      document.getElementById('im-dim').textContent=oW+'×'+oH+'px';
+      document.getElementById('im-type').textContent=f.type.replace('image/','').toUpperCase();
+      document.getElementById('prev').style.display='';
+      document.getElementById('ctrl').style.display='';
+      document.getElementById('dz').style.display='none';
+      document.getElementById('rw').value=oW;document.getElementById('rh').value=oH;
+    }
+    function setMode(m,el){rMode=m;document.querySelectorAll('#mode-chips .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('px-row').style.display=m==='px'?'':'none';document.getElementById('pct-row').style.display=m==='pct'?'':'none';}
+    function syncDim(ch){if(!document.getElementById('ar').checked||!oW)return;const r=oW/oH;if(ch==='w'){const w=+document.getElementById('rw').value;if(w)document.getElementById('rh').value=Math.round(w/r);}else{const h=+document.getElementById('rh').value;if(h)document.getElementById('rw').value=Math.round(h*r);}}
+    function doResize(){
+      if(!oImg){showToast('Upload an image first.');return;}
+      let tw,th;
+      if(rMode==='pct'){const p=parseFloat(document.getElementById('pct').value)/100;tw=Math.round(oW*p);th=Math.round(oH*p);}
+      else{tw=+document.getElementById('rw').value||oW;th=+document.getElementById('rh').value||oH;}
+      const fmt=document.getElementById('fmt').value,ext=fmt.split('/')[1];
+      Img.dl(Img.canvas(oImg,tw,th),`resized-${tw}x${th}.${ext}`,fmt,0.92);
+      showToast(`Downloading ${tw}×${th} image!`);
+    }
+    function resetTool(){oImg=null;document.getElementById('dz').style.display='';document.getElementById('prev').style.display='none';document.getElementById('ctrl').style.display='none';document.getElementById('fi').value='';}
+  </script>
+</body>
+</html>

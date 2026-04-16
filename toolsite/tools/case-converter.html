@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Case Converter — UPPER, lower, Title, camelCase | ToolVerse</title>
+  <meta name="description" content="Convert text to uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case and kebab-case online for free."/>
+  <meta name="keywords" content="case converter, uppercase converter, lowercase converter, title case, camelCase, snake_case"/>
+  <link rel="canonical" href="https://toolverse.io/tools/case-converter.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Text Tools</span><span class="bc-sep">›</span><span>Case Converter</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">🔡</div><div><h1 class="tool-title">Case Converter</h1><span class="badge badge-green">Free</span></div></div>
+          <p class="tool-desc">Transform your text into any case style — UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and more.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <div class="form-group">
+            <label class="form-label" for="cc-in">Input Text</label>
+            <textarea class="form-ctrl" id="cc-in" placeholder="Paste or type your text here…" rows="6"></textarea>
+          </div>
+          <div class="chips">
+            <button class="chip" onclick="cc('upper')">UPPERCASE</button>
+            <button class="chip" onclick="cc('lower')">lowercase</button>
+            <button class="chip" onclick="cc('title')">Title Case</button>
+            <button class="chip" onclick="cc('sentence')">Sentence case</button>
+            <button class="chip" onclick="cc('camel')">camelCase</button>
+            <button class="chip" onclick="cc('pascal')">PascalCase</button>
+            <button class="chip" onclick="cc('snake')">snake_case</button>
+            <button class="chip" onclick="cc('kebab')">kebab-case</button>
+            <button class="chip" onclick="cc('alt')">aLtErNaTiNg</button>
+            <button class="chip" onclick="cc('inv')">iNVERSE</button>
+          </div>
+          <div class="form-group" style="margin-top:20px;">
+            <label class="form-label">Output</label>
+            <div class="out-box" id="cc-out">Your converted text will appear here…<button class="cp-btn" onclick="ccCopy()">Copy</button></div>
+          </div>
+          <div class="btn-grp">
+            <button class="btn btn-secondary" onclick="document.getElementById('cc-in').value='';setOut('Your converted text will appear here…')">🗑️ Clear</button>
+          </div>
+        </div>
+        <div class="how-to">
+          <h3>📖 How to Use Case Converter</h3>
+          <ol>
+            <li>Paste or type your text into the input box.</li>
+            <li>Click any case button (e.g. <strong>UPPERCASE</strong>, <strong>Title Case</strong>) to convert instantly.</li>
+            <li>The result appears in the output box. Click <strong>Copy</strong> to copy it.</li>
+            <li>Use <strong>snake_case</strong> and <strong>kebab-case</strong> for programming variable names.</li>
+          </ol>
+        </div>
+        <div class="about-tool">
+          <h3>ℹ️ About Case Converter</h3>
+          <p>This free online case converter supports 10 different text cases. It's ideal for programmers naming variables, writers standardising headings, or anyone who needs quick text transformations. All processing happens in your browser — nothing is sent to a server.</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="word-counter.html"><div class="rel-ico">🔢</div>Word Counter</a>
+          <a class="rel-item" href="text-repeater.html"><div class="rel-ico">🔁</div>Text Repeater</a>
+          <a class="rel-item" href="text-sorter.html"><div class="rel-ico">📋</div>Text Sorter</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    function setOut(text) {
+      const out=document.getElementById('cc-out'), btn=out.querySelector('.cp-btn');
+      out.textContent=text; out.appendChild(btn);
+    }
+    function cc(type) {
+      const raw=document.getElementById('cc-in').value;
+      if(!raw.trim()){showToast('Please enter some text first.');return;}
+      let r='';
+      switch(type){
+        case'upper':r=raw.toUpperCase();break;
+        case'lower':r=raw.toLowerCase();break;
+        case'title':r=raw.toLowerCase().replace(/(?:^|\s)\S/g,c=>c.toUpperCase());break;
+        case'sentence':r=raw.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g,c=>c.toUpperCase());break;
+        case'camel':r=raw.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g,(_,c)=>c.toUpperCase());r=r.charAt(0).toLowerCase()+r.slice(1);break;
+        case'pascal':r=raw.toLowerCase().replace(/(?:^|\s|[^a-zA-Z0-9])(\S)/g,(_,c)=>c.toUpperCase()).replace(/[^a-zA-Z0-9]/g,'');break;
+        case'snake':r=raw.trim().toLowerCase().replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');break;
+        case'kebab':r=raw.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'');break;
+        case'alt':r=raw.split('').map((c,i)=>i%2===0?c.toLowerCase():c.toUpperCase()).join('');break;
+        case'inv':r=raw.split('').map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join('');break;
+      }
+      setOut(r);
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+    function ccCopy(){const out=document.getElementById('cc-out');copyToClipboard(out.childNodes[0]?.nodeValue||'',out.querySelector('.cp-btn'));}
+  </script>
+</body>
+</html>

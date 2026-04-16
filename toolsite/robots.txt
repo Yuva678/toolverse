@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block system files
+Disallow: /private/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://toolverse-pi.vercel.app/sitemap.xml

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Base64 Encoder Decoder — Free Online Tool | ToolVerse</title>
+  <meta name="description" content="Encode text to Base64 or decode Base64 back to readable text. Supports UTF-8 characters. Free browser-based tool — no data sent to servers."/>
+  <meta name="keywords" content="base64 encoder, base64 decoder, encode base64 online, decode base64, base64 tool"/>
+  <link rel="canonical" href="https://toolverse.io/tools/base64.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+  <div id="tv-nav"></div>
+  <div class="container"><div class="ad-unit ad-header">📢 Advertisement — 728×90</div></div>
+  <main class="container">
+    <div class="tool-pg">
+      <div>
+        <nav class="breadcrumb"><a href="../index.html">Home</a><span class="bc-sep">›</span><span>Developer Tools</span><span class="bc-sep">›</span><span>Base64 Encoder/Decoder</span></nav>
+        <div class="tool-head">
+          <div class="tool-irow"><div class="tool-pgico">🔐</div><div><h1 class="tool-title">Base64 Encoder / Decoder</h1><span class="badge badge-purple">Dev Tool</span></div></div>
+          <p class="tool-desc">Encode plain text to Base64 format, or decode Base64 strings back to readable text. Supports UTF-8 encoding for international characters. Instant, private, browser-based.</p>
+        </div>
+        <div class="ad-unit ad-incontent">📢 Advertisement</div>
+        <div class="tool-box">
+          <!-- Mode toggle -->
+          <div class="chips" id="mode-chips">
+            <button class="chip active" onclick="setMode('enc',this)">🔒 Encode to Base64</button>
+            <button class="chip" onclick="setMode('dec',this)">🔓 Decode from Base64</button>
+          </div>
+
+          <div class="form-group" style="margin-top:16px;">
+            <label class="form-label" id="in-lbl">Text to Encode</label>
+            <textarea class="form-ctrl" id="b64-in" rows="7" placeholder="Enter text to encode…" style="font-family:'JetBrains Mono',monospace;font-size:.875rem;"></textarea>
+          </div>
+
+          <div class="btn-grp">
+            <button class="btn btn-primary" onclick="processB64()">⚡ Convert</button>
+            <button class="btn btn-secondary" onclick="swapB64()">⇅ Swap Input/Output</button>
+            <button class="btn btn-secondary" onclick="clearB64()">🗑️ Clear</button>
+          </div>
+
+          <div id="b64-err" class="alert alert-warning" style="display:none;margin-top:14px;">⚠️ Invalid Base64 string — check your input for errors.</div>
+
+          <div class="form-group" style="margin-top:20px;">
+            <label class="form-label" id="out-lbl">Base64 Output</label>
+            <div class="out-box" id="b64-out" style="font-family:'JetBrains Mono',monospace;min-height:100px;word-break:break-all;">
+              Result appears here…<button class="cp-btn" onclick="b64Copy()">Copy</button>
+            </div>
+          </div>
+
+          <div class="stats-row" style="margin-top:16px;">
+            <div class="s-badge"><div class="s-val" id="b64-inlen">0</div><div class="s-lbl">Input chars</div></div>
+            <div class="s-badge"><div class="s-val" id="b64-outlen">0</div><div class="s-lbl">Output chars</div></div>
+            <div class="s-badge"><div class="s-val" id="b64-ratio">—</div><div class="s-lbl">Size ratio</div></div>
+          </div>
+        </div>
+
+        <div class="how-to">
+          <h3>📖 How to Use Base64 Tool</h3>
+          <ol>
+            <li>Select <strong>Encode</strong> to convert plain text to Base64, or <strong>Decode</strong> to reverse it.</li>
+            <li>Paste your input text in the text area.</li>
+            <li>Click <strong>Convert</strong> to see the result instantly.</li>
+            <li>Use <strong>Swap</strong> to send the output back as input for chaining operations.</li>
+          </ol>
+        </div>
+        <div class="about-tool">
+          <h3>ℹ️ What is Base64?</h3>
+          <p>Base64 encodes binary data into ASCII text using 64 printable characters (A–Z, a–z, 0–9, +, /). It's widely used to embed binary data in JSON, XML, email, and HTML. Base64 encoding increases data size by ~33%. It is an encoding scheme, not encryption — encoded data can be decoded by anyone.</p>
+        </div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-unit ad-sidebar">📢 Advertisement<br>300×250</div>
+        <div class="related-box"><h3>Related Tools</h3>
+          <a class="rel-item" href="json-formatter.html"><div class="rel-ico">{ }</div>JSON Formatter</a>
+          <a class="rel-item" href="word-counter.html"><div class="rel-ico">🔢</div>Word Counter</a>
+          <a class="rel-item" href="case-converter.html"><div class="rel-ico">🔡</div>Case Converter</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div id="tv-footer"></div>
+  <script src="../js/nav.js"></script><script src="../js/main.js"></script>
+  <script>
+    let b64Mode='enc';
+    function setMode(m,el){
+      b64Mode=m;
+      document.querySelectorAll('#mode-chips .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');
+      document.getElementById('in-lbl').textContent=m==='enc'?'Text to Encode':'Base64 to Decode';
+      document.getElementById('out-lbl').textContent=m==='enc'?'Base64 Output':'Decoded Text';
+      document.getElementById('b64-in').placeholder=m==='enc'?'Enter plain text here…':'Enter Base64 string here…';
+    }
+    function setOut(text){const out=document.getElementById('b64-out'),btn=out.querySelector('.cp-btn');out.textContent=text;out.appendChild(btn);}
+    function processB64(){
+      const inp=document.getElementById('b64-in').value;
+      const err=document.getElementById('b64-err');
+      err.style.display='none';
+      if(!inp.trim()){showToast('Please enter some text first.');return;}
+      let result='';
+      try{
+        result=b64Mode==='enc'?btoa(unescape(encodeURIComponent(inp))):decodeURIComponent(escape(atob(inp.trim())));
+      }catch(e){err.style.display='';return;}
+      setOut(result);
+      document.getElementById('b64-inlen').textContent=inp.length.toLocaleString();
+      document.getElementById('b64-outlen').textContent=result.length.toLocaleString();
+      document.getElementById('b64-ratio').textContent=(result.length/inp.length).toFixed(2)+'×';
+    }
+    function swapB64(){
+      const out=document.getElementById('b64-out');
+      const text=(out.childNodes[0]?.nodeValue||'').trim();
+      if(!text||text==='Result appears here…')return;
+      document.getElementById('b64-in').value=text;
+      setMode(b64Mode==='enc'?'dec':'enc',document.getElementById(b64Mode==='enc'?'mode-chips':'mode-chips').querySelectorAll('.chip')[b64Mode==='enc'?1:0]);
+      // Re-select correct chip
+      const chips=document.querySelectorAll('#mode-chips .chip');
+      chips.forEach(c=>c.classList.remove('active'));
+      chips[b64Mode==='enc'?0:1].classList.add('active');
+    }
+    function clearB64(){
+      document.getElementById('b64-in').value='';
+      setOut('Result appears here…');
+      ['b64-inlen','b64-outlen'].forEach(id=>document.getElementById(id).textContent='0');
+      document.getElementById('b64-ratio').textContent='—';
+      document.getElementById('b64-err').style.display='none';
+    }
+    function b64Copy(){copyToClipboard((document.getElementById('b64-out').childNodes[0]?.nodeValue||'').trim());}
+    document.getElementById('b64-in').addEventListener('input',e=>document.getElementById('b64-inlen').textContent=e.target.value.length.toLocaleString());
+  </script>
+</body>
+</html>
